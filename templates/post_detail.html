@@ -1,0 +1,124 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+{% if post.name %}
+<meta property="og:title" content="{{post.name}}" />
+<meta property="og:description" content="{{post.content}}" />
+<meta property="og:url" content="/blog/{{post.pk}}" />
+<meta property="og:image" content="/media/{{post.img}}" />
+{% endif %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{% static '/blog_detail.css' %}">
+<body>
+<div id="navbar">
+  <a class="active" href="/">Home</a>
+  <a href="/register">register</a>
+  <a href="/login">login</a>
+</div>
+
+
+    
+<center><div class="content">
+        {% if post.name %}
+            
+                <h1>Blog author={{ post.author }}</h1>
+                <img src="/media/{{post.img}}" alt="Nature" style="width:50%">
+                <br>
+                {{post.content}}
+                <br>
+                
+         <!--    <a href="/question/tag/1/1/?list_id={{post.id}}">{{post|urlencode}}</a>   -->
+            
+        {% endif %}
+
+        <a target="_blank" href="https://web.whatsapp.com/send?text=http://127.0.0.1:8000/blog/{{post.pk}}" data-original-title="whatsapp" rel="tooltip" data-placement="left" data-action="share/whatsapp/share">share on whatapp</a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/blog/{{post.pk}}">
+        Share on Facebook
+        </a> 
+
+        
+
+
+
+    
+
+
+
+<div class="container">
+    
+            <div class="row">
+
+                <div class="col-md-8">
+                    {%for i in lis|slice:":1"%}
+                  <div class="page-header">
+                    <h1><small class="pull-right">{{i}} comments</small> Comments </h1>
+                  </div>
+                  {%endfor%}
+                    <form method='post' action="/blog/{{ post.id }}/">
+                        {% csrf_token %}
+                        <input type="text" name="coment">
+                        
+                        <input type="submit" value="Post" name="submit">
+                    </form>       
+                  {%for i in commet%}
+                   <div class="comments-list">
+
+
+                       <div class="media">
+                        
+                           <p class="pull-right"><small>{{i.created_date}}</small></p>
+                        
+                            <!--<a class="media-left" href="#">
+                              <img src="http://lorempixel.com/40/40/people/1/">
+                            </a> -->
+                            
+                            <div class="media-body">
+
+                                {%if request.user.is_authenticated%}
+                              <h4 class="media-heading user_name">{{request.user}}</h4>
+                                {%endif%}
+                              {{i.comments}}
+
+                              
+                              
+                              
+                              
+                             <!-- <p><small><a href="">Like</a> - <a href="">Share</a></small></p> -->
+                            </div>
+                            
+                          </div>
+                       
+                          </div>
+                          {%endfor%}
+                   </div>
+                   
+                    
+                    
+                    
+                </div>
+
+            </div>
+
+    
+        </div>
+    
+
+</div>
+
+
+
+</center>
+
+    
+
+</body>
+</html>

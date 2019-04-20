@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add form</title>
+	<style type="text/css">
+		
+
+
+	</style>
+</head>
+<body>
+	{% block content %}
+
+	{% if user.is_authenticated %}
+		<H1>HELLO</H1>
+		<form method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="text" name="head">
+			<br>
+		
+			<textarea class="yash" name="content" rows="10" cols="30"></textarea>
+			<br>
+			<label>image</label>
+			<input type="file" name="pho" accept="image/*">
+			<br>
+			
+
+			<p><input type="submit" value="Click me!"></p>
+
+
+		</form>
+	{%else%}
+		<a href="/login/">login here</a>
+	{%endif%}
+
+	{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{%if post.name%}
+	<form method='post' enctype="multipart/form-data">
+			{% csrf_token %}
+			<label>name</label>
+			<input type="text" name="head" value="{{post.name}}">
+			<br>
+			<label>description</label>
+			<input type="text" name="content" value="{{post.content}}">
+			<br>
+			<label>image</label>
+			<input type="file" name="pho" accept="image/*">
+			<br>
+			
+
+			<p><input type="submit" value="Click me!"></p>
+	</form>
+	{%endif%}
+</body>
+</html>
